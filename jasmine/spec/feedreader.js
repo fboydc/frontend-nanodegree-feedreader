@@ -29,20 +29,20 @@ Test Suite: RSS Feeds
 Description:
 This is our first test - it tests to make sure that the
 allFeeds variable has been defined and that it is not
-empty. 
+empty.
 
-Test 1: makes sure our allFeeds array is not empty or undefined 
+Test 1: makes sure our allFeeds array is not empty or undefined
 
-Test 2: Makes sure our feed objects inside allFeeds all have a 
+Test 2: Makes sure our feed objects inside allFeeds all have a
 'url' property defined, and it's not equal to the empty
 string.
 
-Test 3: Makes sure our feed objects inside allFeeds all have a 
+Test 3: Makes sure our feed objects inside allFeeds all have a
 'name' property defined, and it's not equal to the empty
 string.
 ***************************************************************/
     describe('RSS Feeds', function() {
-        /* 
+        /*
          */
         it('are defined', function() {
             expect(allFeeds).toBeDefined();
@@ -111,15 +111,15 @@ hides back when clicked again.
 
 
         it('should toggle visibility when clicked', function(){
-           expect($(document.body).hasClass('menu-hidden')).toBe(true);
+           expect($(document.body).hasClass('menu-hidden')).toBeTruthy();
            $('.icon-list').click();
-           expect($(document.body).hasClass('menu-hidden')).toBe(false);
+           expect($(document.body).hasClass('menu-hidden')).toBeFalsy();
            $('.icon-list').click();
-           expect($(document.body).hasClass('menu-hidden')).toBe(true);       
+           expect($(document.body).hasClass('menu-hidden')).toBeTruthy();
         });
-        
 
-        
+
+
     });
 
 /**************************************************************
@@ -149,13 +149,13 @@ is greater than 0.
             expect(entries.length).toBeGreaterThan(0);
          });
     });
-        
+
 
 
 /**************************************************************
 Test Suite: New Feed Selection
 Description:
-Tests that our DOM changed after making our API calls 
+Tests that our DOM changed after making our API calls
 
 Test 1: compares our container element before and after the ajax call,
 making sure our content changed
@@ -165,31 +165,31 @@ making sure our content changed
     describe("New Feed Selection", function(){
 
         var container = $('.feed');
-        var initialContent; 
+        var initialContent;
         var changedContent;
 
+        var myfunc = function(){
 
+        }
 
          beforeEach(function(done){
-           loadFeed(1, done);          /*
-            loadFeed(1, done);
-            initialContent = container.html();
-            console.log("initial content" + initialContent);
-            loadFeed(2, done);
-            changedContent = container.html();
-            console.log("change content" + changedContent);*/
-           
+
+           loadFeed(0, function(){
+
+                initialContent = container.html();
+
+                loadFeed(1, function(){
+
+                    changedContent = container.html();
+                    done();
+                });
+           });
+
+
+
          });
 
-         it("should be able to change its content", function(done){
-         	initialContent = container.html();
-         	console.log("init: "+initialContent);
-         	loadFeed(2, function(){
-         		changedContent = container.html();
-         	});
-         	
-         	console.log("changed:"+changedContent);
-
+         it("should be able to change its content", function(){
             expect(initialContent).not.toBe(changedContent);
 
          });
@@ -197,5 +197,5 @@ making sure our content changed
 
     });
 
-    
+
 }());
