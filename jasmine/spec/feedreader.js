@@ -1,25 +1,48 @@
-/* feedreader.js
- *
- * This is the spec file that Jasmine will read and contains
- * all of the tests that will be run against your application.
- */
+/**************************************************************
+Name: feedreader.js
+Author: Udacity.com
+Edited By: Felipe Boyd
+Date: 11.26.2017
+Description:
+This is the spec file that Jasmine will read and contains
+all of the tests that will be run against your application.
+***************************************************************/
+
 
 /* We're placing all of our tests within the $() function,
  * since some of these tests may require DOM elements. We want
  * to ensure they don't run until the DOM is ready.
  */
+
 $(function() {
     /* This is our first test suite - a test suite just contains
     * a related set of tests. This suite is all about the RSS
     * feeds definitions, the allFeeds variable in our application.
     */
+
+    /*
+
+    */
+
+/**************************************************************
+Test Suite: RSS Feeds
+Description:
+This is our first test - it tests to make sure that the
+allFeeds variable has been defined and that it is not
+empty. 
+
+Test 1: makes sure our allFeeds array is not empty or undefined 
+
+Test 2: Makes sure our feed objects inside allFeeds all have a 
+'url' property defined, and it's not equal to the empty
+string.
+
+Test 3: Makes sure our feed objects inside allFeeds all have a 
+'name' property defined, and it's not equal to the empty
+string.
+***************************************************************/
     describe('RSS Feeds', function() {
-        /* This is our first test - it tests to make sure that the
-         * allFeeds variable has been defined and that it is not
-         * empty. Experiment with this before you get started on
-         * the rest of this project. What happens when you change
-         * allFeeds in app.js to be an empty array and refresh the
-         * page?
+        /* 
          */
         it('are defined', function() {
             expect(allFeeds).toBeDefined();
@@ -55,60 +78,68 @@ $(function() {
     });
 
 
+
+/**************************************************************
+Test Suite: The menu
+Description:
+Tests all features involving our slide menu.
+
+
+
+Test 1:ensures the menu element is hidden when the page initially loads.
+
+Test 2: ensures the menu changes visibility when the menu icon is clicked,
+hides back when clicked again.
+
+***************************************************************/
+
     /* TODO: Write a new test suite named "The menu" */
     describe('The menu', function(){
         var menu = $('.slide-menu');
         var defaultLeftPosition, leftDistance;
 
+        //store our default position before running our tests.
+
         beforeEach(function(){
             defaultLeftPosition = -192;
             leftDistance = menu.position().left;
         });
-        /* TODO: Write a test that ensures the menu element is
-         * hidden by default. You'll have to analyze the HTML and
-         * the CSS to determine how we're performing the
-         * hiding/showing of the menu element.
-         */
+
          it('should be hidden by default', function(){
             expect(leftDistance).toBe(defaultLeftPosition);
         });
 
-         /* TODO: Write a test that ensures the menu changes
-          * visibility when the menu icon is clicked. This test
-          * should have two expectations: does the menu display when
-          * clicked and does it hide when clicked again.
-          */
 
-          it('should toggle visibility when clicked', function(){
+        it('should toggle visibility when clicked', function(){
            expect($(document.body).hasClass('menu-hidden')).toBe(true);
            $('.icon-list').click();
            expect($(document.body).hasClass('menu-hidden')).toBe(false);
            $('.icon-list').click();
-           expect($(document.body).hasClass('menu-hidden')).toBe(true);
-
-                
-                    
-          });
+           expect($(document.body).hasClass('menu-hidden')).toBe(true);       
+        });
         
 
         
     });
 
+/**************************************************************
+Test Suite: Initial Entries
+Description:
+Tests that our page is loaded with entries.
+
+Test 1: Makes sure that the number of elements with class entry
+is greater than 0.
+
+***************************************************************/
 
 
 
-    /* TODO: Write a new test suite named "Initial Entries" */
     describe("Initial Entries", function(){
 
         var container = $('.feed');
         var next;
-        /* TODO: Write a test that ensures when the loadFeed
-         * function is called and completes its work, there is at least
-         * a single .entry element within the .feed container.
-         * Remember, loadFeed() is asynchronous so this test will require
-         * the use of Jasmine's beforeEach and asynchronous done() function.
-         */
 
+        //Test by passing one element from our allFeeds array into the loadFeed function.
          beforeEach(function(done){
             loadFeed(1, done);
          });
@@ -121,16 +152,21 @@ $(function() {
         
 
 
-    /* TODO: Write a new test suite named "New Feed Selection" */
+/**************************************************************
+Test Suite: New Feed Selection
+Description:
+Tests that our DOM changed after making our API calls 
+
+Test 1: compares our container element before and after the ajax call,
+making sure our content changed
+
+
+***************************************************************/
     describe("New Feed Selection", function(){
 
         var container = $('.feed');
         var content = container.html();
 
-        /* TODO: Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
 
 
          beforeEach(function(done){

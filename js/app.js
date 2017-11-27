@@ -1,12 +1,23 @@
-/* app.js
- *
- * This is our RSS feed reader application. It uses the Google
- * Feed Reader API to grab RSS feeds as JSON object we can make
- * use of. It also uses the Handlebars templating library and
- * jQuery.
- */
+/******************************************
+Name: app.js
+Author: Udacity.com
+Edited By: Felipe Boyd
+Date: 11.26.2017
+Description:
+This is our RSS feed reader application. It uses the Google
+ Feed Reader API to grab RSS feeds as JSON object we can make
+use of. It also uses the Handlebars templating library and
+jQuery.
 
-// The names and URLs to all of the feeds we'd like available.
+*******************************************/
+
+/******************************************
+Name: allFeeds
+Type: array <Object>
+Description: 
+Our database containing feeds to fetch in our
+application
+*******************************************/
 var allFeeds = [
     {
         name: 'Udacity Blog',
@@ -23,23 +34,37 @@ var allFeeds = [
     }
 ];
 
-/* This function starts up our application. The Google Feed
- * Reader API is loaded asynchonously and will then call this
- * function when the API is loaded.
- */
+
+
+/******************************************
+Name: init
+Type: function object
+Parameters: none
+Description: 
+This function starts up our application. The Google Feed
+Reader API is loaded asynchonously and will then call this
+function when the API is loaded.
+*******************************************/
 function init() {
     // Load the first feed we've defined (index of 0).
     loadFeed(0);
 }
 
-/* This function performs everything necessary to load a
- * feed using the Google Feed Reader API. It will then
- * perform all of the DOM operations required to display
- * feed entries on the page. Feeds are referenced by their
- * index position within the allFeeds array.
- * This function all supports a callback as the second parameter
- * which will be called after everything has run successfully.
- */
+
+
+/******************************************
+Name: loadFeed
+Type: function object
+Parameters: 2 -    Integer, function object
+Description: 
+ This function performs everything necessary to load a
+ feed using the Google Feed Reader API. It will then
+ perform all of the DOM operations required to display
+ feed entries on the page. Feeds are referenced by their
+ index position within the allFeeds array.
+ This function all supports a callback as the second parameter
+ which will be called after everything has run successfully.
+*******************************************/
  function loadFeed(id, cb) {
      var feedUrl = allFeeds[id].url,
          feedName = allFeeds[id].name;
@@ -75,6 +100,7 @@ function init() {
                },
        error: function (result, status, err){
                  //run only the callback without attempting to parse result due to error
+
                  if (cb) {
                      cb();
                  }
