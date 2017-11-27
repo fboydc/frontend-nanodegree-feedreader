@@ -169,9 +169,6 @@ content has changed.
         var initialContent;
         var changedContent;
 
-        var myfunc = function(){
-
-        }
 
          beforeEach(function(done){
 
