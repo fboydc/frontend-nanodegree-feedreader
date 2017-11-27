@@ -157,8 +157,9 @@ Test Suite: New Feed Selection
 Description:
 Tests that our DOM changed after making our API calls
 
-Test 1: compares our container element before and after the ajax call,
-making sure our content changed
+Test 1: compares our content by making two different ajax calls.
+If the content between these two ajax calls differs, we know the
+content has changed.
 
 
 ***************************************************************/
