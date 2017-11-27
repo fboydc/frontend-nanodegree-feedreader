@@ -165,18 +165,33 @@ making sure our content changed
     describe("New Feed Selection", function(){
 
         var container = $('.feed');
-        var content = container.html();
+        var initialContent; 
+        var changedContent;
 
 
 
          beforeEach(function(done){
+           loadFeed(1, done);          /*
             loadFeed(1, done);
+            initialContent = container.html();
+            console.log("initial content" + initialContent);
+            loadFeed(2, done);
+            changedContent = container.html();
+            console.log("change content" + changedContent);*/
+           
          });
 
-         it("should be able to change its content", function(){
+         it("should be able to change its content", function(done){
+         	initialContent = container.html();
+         	console.log("init: "+initialContent);
+         	loadFeed(2, function(){
+         		changedContent = container.html();
+         	});
+         	
+         	console.log("changed:"+changedContent);
 
-            var updatedContent =  container.html();
-            expect(content).not.toBe(updatedContent);
+            expect(initialContent).not.toBe(changedContent);
+
          });
 
 
